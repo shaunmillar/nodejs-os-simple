@@ -28,8 +28,15 @@ npm install --save PACKAGE_NAME
 OpenShift’s Node.js cartridge automatically publishes server connection information to your application’s environment via the following environment variables: OPENSHIFT_NODEJS_PORT and OPENSHIFT_NODEJS_IP
 
 ```javascript
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+
+// openshift v2
+// var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
+// var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+
+// openshift v3
+var server_port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080
+var server_ip_address = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0'
+
  
 server.listen(server_port, server_ip_address, function () {
   console.log( "Listening on " + server_ip_address + ", port " + server_port )
